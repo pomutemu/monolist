@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
 # Use SCSS for stylesheets
@@ -23,7 +23,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+if Bundler::WINDOWS
+  gem 'bcrypt-ruby', '3.1.0', require: 'bcrypt'
+else
+  gem 'bcrypt', '~> 3.1.10', require: false
+end
 
 gem 'dotenv-rails', :groups => [:development, :test]
 
@@ -31,6 +35,7 @@ gem 'bootstrap-sass'
 # https://github.com/jugend/amazon-ecs
 gem 'amazon-ecs'
 
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -55,4 +60,3 @@ group :development, :test do
 
   gem 'pry-rails'
 end
-
