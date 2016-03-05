@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708042943) do
+ActiveRecord::Schema.define(version: 20160301114411) do
+
+  create_table "haves", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "haves", ["item_id"], name: "index_haves_on_item_id"
+  add_index "haves", ["user_id", "item_id", "type"], name: "index_haves_on_user_id_and_item_id_and_type", unique: true
+  add_index "haves", ["user_id"], name: "index_haves_on_user_id"
 
   create_table "items", force: :cascade do |t|
     t.string   "asin"
@@ -58,5 +70,17 @@ ActiveRecord::Schema.define(version: 20150708042943) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "wants", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "wants", ["item_id"], name: "index_wants_on_item_id"
+  add_index "wants", ["user_id", "item_id", "type"], name: "index_wants_on_user_id_and_item_id_and_type", unique: true
+  add_index "wants", ["user_id"], name: "index_wants_on_user_id"
 
 end
